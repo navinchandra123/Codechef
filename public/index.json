@@ -1,0 +1,76 @@
+{
+  "content": [
+    {
+      "problemCode": "CHAORNOT",
+      "problemName": "To challenge or not",
+      "successfulSubmissions": 106,
+      "accuracy": 54.385964912280706
+    },
+    {
+      "problemCode": "CHALENGE",
+      "problemName": "Password Cracking Challenge",
+      "successfulSubmissions": 113,
+      "accuracy": 66.30901287553648
+    },
+    {
+      "problemCode": "CHEFPAR",
+      "problemName": "Chef and Array (Challenge)",
+      "successfulSubmissions": 126,
+      "accuracy": 69.76241900647948
+    },
+    {
+      "problemCode": "SORTROW",
+      "problemName": "(CH) Bear and Sorted Rows",
+      "successfulSubmissions": 129,
+      "accuracy": 74.91408934707904
+    },
+    {
+      "problemCode": "GERALD09",
+      "problemName": "Chef and Rectangle Genome",
+      "successfulSubmissions": 137,
+      "accuracy": 76.80851063829788
+    },
+    {
+      "problemCode": "TLCS",
+      "problemName": "Longest Common Subsequence",
+      "successfulSubmissions": 155,
+      "accuracy": 19.363957597173144
+    },
+    {
+      "problemCode": "COVDSMPL",
+      "problemName": "Covid Sampling (Challenge)",
+      "successfulSubmissions": 173,
+      "accuracy": 44.168260038240916
+    },
+    {
+      "problemCode": "SEAVEC",
+      "problemName": "Sereja and Vectors",
+      "successfulSubmissions": 193,
+      "accuracy": 62.32464929859719
+    },
+    {
+      "problemCode": "RAISINS",
+      "problemName": "(Challenge) Raisins",
+      "successfulSubmissions": 392,
+      "accuracy": 71.72236503856041
+    },
+    {
+      "problemCode": "ANSLEAK",
+      "problemName": "Leaked Answers (Challenge)",
+      "successfulSubmissions": 414,
+      "accuracy": 76.9689737470167
+    },
+    {
+      "problemCode": "RECTARAN",
+      "problemName": "Moving Rectangles (Challenge)",
+      "successfulSubmissions": 507,
+      "accuracy": 83.8107098381071
+    },
+    {
+      "problemCode": "FACTORIZ",
+      "problemName": "Factorisation",
+      "successfulSubmissions": 557,
+      "accuracy": 41.776798825256975
+    }
+  ]
+}

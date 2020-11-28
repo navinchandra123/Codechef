@@ -1,0 +1,18 @@
+{
+    "require": {
+        "slim/slim": "4.*",
+        "slim/psr7": "^1.2",
+        "nyholm/psr7": "^1.3",
+        "nyholm/psr7-server": "^1.0",
+        "guzzlehttp/psr7": "^1.7",
+        "http-interop/http-factory-guzzle": "^1.0",
+        "laminas/laminas-diactoros": "^2.4",
+        "selective/basepath": "^1.0",
+        "slim/twig-view": "3.x-dev",
+        "twig/markdown-extra": "^3.1",
+        "erusev/parsedown": "^1.7",
+        "aptoma/twig-markdown": "^3.3",
+        "michelf/php-markdown": "~1.8",
+        "league/commonmark": "~0.19"
+    }
+}
