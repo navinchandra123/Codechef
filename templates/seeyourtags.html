@@ -103,10 +103,10 @@
             display: inline;
             margin-top: 0px;
             padding-top: 0px;
-            margin-left: 30px;
-            margin-right: 30px;
-            padding-left: 30px;
-            padding-right: 30px;
+            margin-left: 60px;
+            margin-right: 60px;
+            padding-left: 60px;
+            padding-right: 60px;
         }
 
         @media (max-width: 768px) {
@@ -269,47 +269,14 @@
             </div>
         </div>
     </div>
-    <div style="padding-bottom: 20px;">
-        <h3 >
-            <a class="btn btn-secondary" href="seeyourtags?id={{email}}" style="display: block;margin-left: 350px; margin-right: 350px;"><i
-                    class="fa " style="display: inline;"></i> See Your Own Tags</a>
-        </h3>
-    </div>
-    
-    <form action="/Codechef/afterlogin" method="POST">
+    <form action="/Codechef/seeyourtags" method="POST">
         <input type="hidden" name="email" value="{{email}}">
-        <div class="tags">
-            <label for="difficultu">Difficulty: </label>
-            <select name="difficulty">
-                <option value="select">-select-</option>
-                <option value="school">School</option>
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
-                <option value="challenge">Challenge</option>
-            </select>
-        </div>
-
         <div class="tags">
             <label for="tags">Tags: </label>
             <select name="tags">
                 <option value="select">-select-</option>
-                {% for tags in data %}
-                {% for tag in tags.tags|trim('[')|trim(']')|split(',') %}
-                {% if tag|length >0 %}
-                <option value="{{tag}}">{{tag}}</option>
-                {% endif %}
-                {% endfor %}
-                {% endfor %}
-            </select>
-        </div>
-
-        <div class="tags">
-            <label for="author">Author: </label>
-            <select name="author">
-                <option value="select">-select-</option>
-                {% for author in data %}
-                <option value="{{author.author}}">{{author.author}}</option>
+                {% for key , value in data %}
+                <option value="{{key}}">{{key}}</option>
                 {% endfor %}
             </select>
         </div>
@@ -326,36 +293,19 @@
                 <th>Difficulty</th>
                 <th>Tag</th>
                 <th>Author</th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
 
-            {% for problem in problems %}
+            {% for problem in list %}
                 <tr onclick="window.location='https://www.codechef.com/problems/{{problem.problemCode}}';" style="cursor: pointer;">
                     <td>{{problem.problemCode|trim('"')}}</td>
                     <td>{{problem.problemName|trim('"')}}</td>
                     <td>{{problem.difficulty|trim('"')}}</td>
                     <td>
-                        {% for tag in problem.tags|split(',') %}
-                        {% if tag|length > 2 %}
-                        {{tag | trim('[]"')}}
-                        {% else %}
-                        ---
-                        {% endif %}
-                        {% endfor %}
+                        {{tag}}
                     </td>
                     <td>{{problem.author|trim('"')}}</td>
-                    <td>
-                        <form action="/Codechef/addproblem" method="GET">
-                            <input type="hidden" name="email" value="{{email}}">
-                            <input type="hidden" name="problemCode" value="{{problem.problemCode}}">
-                            <button>
-                                <i class="fa fa-plus" style="display: inline;"></i>
-                            </button>
-                        </form>
-                            
-                    </td>
                 </tr>
             {% endfor %}
         </tbody>

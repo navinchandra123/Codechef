@@ -240,17 +240,100 @@ $app->post('/addProblem' , function(Request $request , Response $response){
     $problemCode = $_POST['problemCode'];
     $email = $_POST['email'];
     $tag = $_POST['tag'];
+    // echo $problemCode.' '.$email.' '.$tag.'ssdasdsad';
+    require_once('dbconnection.php');
+    $query = "SELECT * FROM `signup` where email='$email'";
+    $result = $mysqli->query($query);
+    while($row = $result->fetch_assoc()){
+        $data[] = $row;
+    }
+    // print_r($data);
+    $tags = $data[0]['tags'];
+    $ttags = $tags.$tag.':'.$problemCode.',';
+    // echo $ttags;
+    $query = "UPDATE signup SET tags = '$ttags' WHERE email = '$email'";
+    $result = $mysqli->query($query);
+    return $response->withHeader('Location', '/Codechef/afterlogin?id='.$_POST['email']."&wrong=1")->withStatus(200);
+});
+
+$app->get('/seeyourtags' , function(Request $request , Response $response){
+    $view = Twig::fromRequest($request);
+
+    $email = $_GET['id'];
 
     require_once('dbconnection.php');
-    $query = "SELECT * FROM `signup`";
+    $query = "SELECT * FROM `signup`  where email='$email'";
     $result = $mysqli->query($query);
     while($row = $result->fetch_assoc()){
         $data[] = $row;
     }
     $tags = $data[0]['tags'];
-    
-    $tags = $tags.','.$tag.':'.$problemCode.',';
+    $tagss = explode(',' , $tags);
+    foreach($tagss as $tag){
+        $anothertag = explode(':' , $tag);
+        if(strlen($anothertag[0])==0)continue;
+        if ( ! isset($anothertag[1])) {
+            $anothertag[1] = null;
+         }
+         $problem[$anothertag[0]][] = $anothertag[1];
+    }
 
+    // foreach($problem as $key=>$value){
+    //     foreach($value as $problemCode){
+    //         $query = "SELECT * FROM `data`  where problemCode='$problemCode'";
+    //         $result = $mysqli->query($query);
+    //         while($row = $result->fetch_assoc()){
+    //             $dataa[] = $row;
+    //         }
+    //         $datas = $dataa[0];
+    //         $list[$key][] = $datas;
+    //         print_r($list);
+    //     }
+    // }
+    // print_r($list);
+
+    return $view->render($response , 'seeyourtags.html' , ['data' => $problem , 'email'=>$email] );
+});
+
+$app->post('/seeyourtags' , function(Request $request , Response $response){
+    $view = Twig::fromRequest($request);
+    $email = $_POST['email'];
+    $usertag = $_POST['tags'];
+
+    require_once('dbconnection.php');
+    $query = "SELECT * FROM `signup`  where email='$email'";
+    $result = $mysqli->query($query);
+    while($row = $result->fetch_assoc()){
+        $data[] = $row;
+    }
+    $tags = $data[0]['tags'];
+    $tagss = explode(',' , $tags);
+    foreach($tagss as $tag){
+        $anothertag = explode(':' , $tag);
+        if(strlen($anothertag[0])==0)continue;
+        if ( ! isset($anothertag[1])) {
+            $anothertag[1] = null;
+         }
+         $problem[$anothertag[0]][] = $anothertag[1];
+    }
+
+    foreach($problem[$usertag] as $key=>$value){
+        $query = "SELECT * FROM `data`  where problemCode='$value'";
+        $result = $mysqli->query($query);
+        while($row = $result->fetch_assoc()){
+            $dataa[] = $row;
+        }
+        $datas = $dataa[0];
+        $list[] = $datas;
+    }
+    // print_r($list);
+
+    return $view->render($response , 'seeyourtags.html' , ['tag'=>$usertag, 'flag'=>true, 'data' => $problem , 'list'=>$list , 'email'=>$email] );
+});
+
+$app->get('/logout' , function(Request $request , Response $response){
+    $view = Twig::fromRequest($request);
+    return $response->withHeader('Location', '/Codechef/login')->withStatus(200);
 });
 
 $app->run();

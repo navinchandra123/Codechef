@@ -275,8 +275,7 @@
         <tbody>
             
             {% for problem in problems %}
-                <a href="https://www.codechef.com/problems/{{problem.problemCode}}">
-                    <tr>
+                    <tr onclick="window.location='https://www.codechef.com/problems/{{problem.problemCode}}';" style="cursor: pointer;">
                         <td>{{problem.problemCode|trim('"')}}</td>
                         <td>{{problem.problemName|trim('"')}}</td>
                         <td>{{problem.difficulty|trim('"')}}</td>
@@ -291,7 +290,6 @@
                         </td>
                         <td>{{problem.author|trim('"')}}</td>
                     </tr>
-                </a>
             {% endfor %}
         </tbody>
     </table>
